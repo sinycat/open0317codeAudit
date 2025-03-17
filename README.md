@@ -1,66 +1,23 @@
-## Foundry
+## 内容说明
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+### 1. 写TokenBank合约 继承 AutomationCompatibleInterface 接口
 
-Foundry consists of:
+### 2. 在合约内实现 AutomationCompatibleInterface 的具体逻辑
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
-
-## Documentation
-
-https://book.getfoundry.sh/
-
-## Usage
-
-### Build
-
-```shell
-$ forge build
+```solidity
+interface AutomationCompatibleInterface {
+    function checkUpkeep(bytes calldata checkData) external returns (bool upkeepNeeded, bytes memory performData);
+    function performUpkeep(bytes calldata performData) external;
+}
 ```
 
-### Test
+### 3. 在 https://home.chain.link/ 网注册Upkeep 以TokenBank地址为监控地址,并写入abi的逻辑数据
 
-```shell
-$ forge test
-```
+### 4. 触发条件 观察结果是否正确执行
 
-### Format
 
-```shell
-$ forge fmt
-```
+## 执行成功截图
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+![图片1](images/1.png)
+![图片2](images/2.png)
+![图片3](images/3.png)
